@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holistic Land — a UK marketplace for holistic and wellbeing sellers</title>
+<meta name="description" content="Holistic Land is a UK marketplace for independent sellers of holistic and wellbeing products. Connect the shop you already run on Shopify, Etsy, eBay or Amazon: your listings come across and your stock stays in step.">
+<link rel="canonical" href="https://holistic.land/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://holistic.land/">
+<meta property="og:title" content="Holistic Land — a UK marketplace for holistic and wellbeing sellers">
+<meta property="og:description" content="Connect the shop you already run on Shopify, Etsy, eBay or Amazon. Your listings come across; your stock stays in step.">
+<meta property="og:image" content="https://holistic.land/assets/logo.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23D9741A'/%3E%3C/svg%3E">
+<link rel="preload" href="/assets/caudex-700.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+@font-face{font-family:Caudex;src:url(/assets/caudex-400.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:Caudex;src:url(/assets/caudex-700.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap;
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+
+:root{
+  --ink:#10151C;
+  --navy:#0F2740;
+  --navy-mid:#1B4066;
+  --ember:#C4630F;
+  --ember-lit:#F58E52;
+  --paper:#FFFFFF;
+  --wash:#EFF4F8;
+  --rule:#D6E0E9;
+  --muted:#55636F;
+  --measure:68ch;
+  --pad:clamp(20px,5vw,48px);
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--ember);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink)}
+:focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1080px;margin-inline:auto;padding-inline:var(--pad)}
+
+h1,h2,h3{font-family:Caudex,Georgia,serif;font-weight:700;letter-spacing:-.012em;margin:0}
+h1{font-size:clamp(33px,4.6vw,51px);line-height:1.1;text-wrap:balance}
+h2{font-size:clamp(26px,3.4vw,38px);line-height:1.15;text-wrap:balance}
+h3{font-size:19px;line-height:1.3;letter-spacing:0}
+p{margin:0 0 1.05em;max-width:var(--measure)}
+p:last-child{margin-bottom:0}
+
+.eyebrow{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--navy-mid);margin:0 0 18px;
+}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--rule)}
+.masthead .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:18px}
+.masthead img{width:168px}
+.mast-nav{display:flex;gap:26px;font-size:14px;font-weight:500}
+.mast-nav a{color:var(--navy);text-decoration:none}
+.mast-nav a:hover{color:var(--ember)}
+
+/* ---------- hero ---------- */
+.hero{padding-block:clamp(44px,6.5vw,78px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);
+  gap:clamp(30px,4vw,52px);align-items:center}
+.hero p.lede{font-size:clamp(17px,1.5vw,19px);color:var(--muted);margin-top:22px}
+.hero h1 em{font-style:normal;color:var(--ember)}
+.hero-art{background:var(--wash);border-radius:14px;padding:clamp(16px,1.9vw,24px)}
+
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{
+  display:inline-block;font-size:15px;font-weight:600;text-decoration:none;
+  padding:12px 22px;border-radius:999px;border:1px solid transparent;
+}
+.btn-solid{background:var(--navy);color:#fff}
+.btn-solid:hover{background:var(--navy-mid);color:#fff}
+.btn-line{border-color:var(--rule);color:var(--navy)}
+.btn-line:hover{border-color:var(--navy);color:var(--navy)}
+
+/* ---------- the junction diagram (signature) ---------- */
+.junction{width:100%;height:auto;display:block}
+.j-tile{fill:var(--paper);stroke:#C3D2DE;stroke-width:1}
+.j-lane{fill:none;stroke:#AEC2D3;stroke-width:1.5}
+.j-spark{fill:none;stroke:var(--ember-lit);stroke-width:2.5;stroke-linecap:round;
+  stroke-dasharray:18 900;stroke-dashoffset:0;animation:flow 4.2s linear infinite}
+.j-lane-2 .j-spark{animation-delay:.5s}
+.j-lane-3 .j-spark{animation-delay:1s}
+.j-lane-4 .j-spark{animation-delay:1.5s}
+@keyframes flow{to{stroke-dashoffset:-918}}
+.j-return{fill:none;stroke:var(--navy-mid);stroke-width:1.5;stroke-dasharray:5 5;opacity:.8}
+.j-arrow{fill:none;stroke:var(--navy-mid);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.j-hub-cap{font-family:var(--sans);font-size:13.5px;font-weight:600;fill:var(--ink)}
+.j-label{font-family:var(--sans);font-size:13px;font-weight:500;fill:var(--navy)}
+.j-cap{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;fill:var(--muted)}
+.j-hub{fill:var(--ember)}
+.j-hub-ring{fill:none;stroke:var(--ember);stroke-width:1.5;opacity:.28}
+.j-out{fill:none;stroke:var(--navy);stroke-width:1.5}
+
+@media (prefers-reduced-motion:reduce){
+  .j-spark{animation:none;stroke-dasharray:none;opacity:.5}
+}
+
+/* ---------- generic band ---------- */
+.band{padding-block:clamp(48px,7vw,86px);border-top:1px solid var(--rule)}
+.band-wash{background:var(--wash);border-top:none}
+.band-navy{background:var(--navy);color:#E8EEF4;border-top:none}
+.band-navy h2{color:#fff}
+.band-navy .eyebrow{color:var(--ember-lit)}
+.band-navy a{color:var(--ember-lit)}
+.band-navy a:hover{color:#fff}
+
+.band-head{max-width:var(--measure);margin-bottom:clamp(28px,4vw,44px)}
+.band-head:last-child{margin-bottom:0}
+.band-head p{color:var(--muted);margin-top:14px}
+.band-navy .band-head p{color:#B9C8D6}
+
+/* ---------- platform cards ---------- */
+.platforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:1px;
+  background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.platform{background:var(--paper);padding:26px 24px}
+.platform h3{margin-bottom:10px}
+.platform p{font-size:15px;color:var(--muted);margin:0}
+.platform .tag{
+  display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:12px;
+}
+
+/* ---------- points ---------- */
+.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:clamp(24px,3.5vw,44px);margin-top:8px}
+.point h3{margin-bottom:8px}
+.point p{font-size:15.5px;color:var(--muted);margin:0}
+.band-navy .point p{color:#B9C8D6}
+.point .rule{width:34px;height:2px;background:var(--ember);margin-bottom:16px}
+
+/* ---------- register your interest ---------- */
+.register-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(32px,5vw,64px);align-items:start}
+
+.reg{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);
+  border-radius:14px;padding:clamp(22px,3vw,30px)}
+.reg-set{border:0;margin:0;padding:0;min-width:0}
+.reg-set + .reg-set{margin-top:26px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)}
+.reg-legend{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ember-lit);padding:0}
+.reg-hint{font-size:13.5px;color:#9FB3C6;margin:6px 0 16px}
+
+.reg-types{display:flex;flex-direction:column;gap:10px}
+.reg-type{position:relative;display:block;cursor:pointer}
+.reg-type input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.reg-type-in{display:block;border:1px solid rgba(255,255,255,.2);border-radius:10px;
+  padding:13px 16px;transition:border-color .15s,background-color .15s}
+.reg-type-in strong{display:block;font-size:15.5px;font-weight:600;color:#fff}
+.reg-type-in span{display:block;font-size:13.5px;color:#9FB3C6;margin-top:2px}
+.reg-type:hover .reg-type-in{border-color:rgba(255,255,255,.42)}
+.reg-type input:checked + .reg-type-in{border-color:var(--ember-lit);background:rgba(245,142,82,.12)}
+.reg-type input:focus-visible + .reg-type-in{outline:2px solid var(--ember-lit);outline-offset:2px}
+
+.reg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.reg-field{display:block;min-width:0}
+.reg-label{display:block;font-size:13px;font-weight:500;color:#C6D5E2;margin-bottom:6px}
+.reg-opt{color:#7F94A8;font-weight:400}
+.reg-field input{width:100%;font:inherit;font-size:15px;color:#fff;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);
+  border-radius:8px;padding:10px 12px}
+.reg-field input:focus{outline:2px solid var(--ember-lit);outline-offset:1px;
+  border-color:transparent}
+.reg-pot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.btn-ember{background:var(--ember-lit);color:#25160B;border:0;cursor:pointer;
+  font-family:inherit;margin-top:6px}
+.btn-ember:hover{background:#fff;color:var(--navy)}
+.reg-small{font-size:12.5px;color:#8FA5B8;margin-top:14px}
+.reg-status{margin-top:16px;font-size:14.5px;color:#fff;
+  border-left:2px solid var(--ember-lit);padding-left:12px}
+.reg-status[data-state="error"]{border-left-color:#F0857F}
+
+/* ---------- footer ---------- */
+.foot{background:var(--ink);color:#9FAEBC;font-size:14.5px;padding-block:46px}
+.foot a{color:#D9E2EA}
+.foot a:hover{color:var(--ember-lit)}
+.foot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
+.foot h3{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:#6E8091;margin-bottom:12px}
+.foot p{margin:0;max-width:36ch}
+.foot address{font-style:normal}
+.foot-base{margin-top:36px;padding-top:22px;border-top:1px solid #232C36;font-size:13px;color:#6E8091}
+
+@media (max-width:880px){
+  .hero-grid,.register-grid{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .mast-nav{gap:18px}
+  .reg-row{grid-template-columns:1fr}
+}
+@media (max-width:460px){
+  .mast-nav a[data-optional]{display:none}
+  .masthead img{width:140px}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <img src="/assets/logo.png" width="612" height="99" alt="Holistic Land">
+    <nav class="mast-nav" aria-label="Sections">
+      <a href="#marketplace" data-optional>Marketplace</a>
+      <a href="#sellers">Sellers</a>
+      <a href="#register">Register interest</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">A UK marketplace for holistic wellbeing</p>
+      <h1>Sell here without <em>rebuilding</em> your shop.</h1>
+      <p class="lede">
+        Holistic Land brings independent UK sellers of holistic and wellbeing products together in
+        one storefront. If you already trade on Shopify, Etsy, eBay or Amazon, you connect that
+        shop rather than start again — your listings come across, and your stock stays in step so
+        the same item is never sold twice.
+      </p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#sellers">How connecting works</a>
+        <a class="btn btn-line" href="#register">Register your interest</a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <!-- The junction: shops you already run, feeding one storefront, with stock returning. -->
+      <svg class="junction" viewBox="0 0 520 300" role="img"
+           aria-labelledby="jt jd" xmlns="http://www.w3.org/2000/svg">
+        <title id="jt">How a connected shop works</title>
+        <desc id="jd">Listings from Shopify, Etsy, eBay and Amazon flow into holistic.land and
+          reach buyers, while stock levels are written back to each connected shop.</desc>
+
+        <text class="j-cap" x="0" y="12">Shops you already run</text>
+
+        <g class="j-lane-1">
+          <rect class="j-tile" x="0" y="30" width="112" height="34" rx="8"/>
+          <text class="j-label" x="56" y="52" text-anchor="middle">Shopify</text>
+          <path class="j-lane"  d="M112,47 C200,47 218,128 296,128"/>
+          <path class="j-spark" d="M112,47 C200,47 218,128 296,128"/>
+        </g>
+        <g class="j-lane-2">
+          <rect class="j-tile" x="0" y="84" width="112" height="34" rx="8"/>
+          <text class="j-label" x="56" y="106" text-anchor="middle">Etsy</text>
+          <path class="j-lane"  d="M112,101 C200,101 218,128 296,128"/>
+          <path class="j-spark" d="M112,101 C200,101 218,128 296,128"/>
+        </g>
+        <g class="j-lane-3">
+          <rect class="j-tile" x="0" y="138" width="112" height="34" rx="8"/>
+          <text class="j-label" x="56" y="160" text-anchor="middle">eBay</text>
+          <path class="j-lane"  d="M112,155 C200,155 218,128 296,128"/>
+          <path class="j-spark" d="M112,155 C200,155 218,128 296,128"/>
+        </g>
+        <g class="j-lane-4">
+          <rect class="j-tile" x="0" y="192" width="112" height="34" rx="8"/>
+          <text class="j-label" x="56" y="214" text-anchor="middle">Amazon</text>
+          <path class="j-lane"  d="M112,209 C200,209 218,128 296,128"/>
+          <path class="j-spark" d="M112,209 C200,209 218,128 296,128"/>
+        </g>
+
+        <!-- the hub is the dot from the holistic.land wordmark -->
+        <circle class="j-hub-ring" cx="318" cy="128" r="22"/>
+        <circle class="j-hub" cx="318" cy="128" r="12"/>
+        <text class="j-hub-cap" x="318" y="172" text-anchor="middle">holistic.land</text>
+
+        <!-- out to buyers -->
+        <path class="j-out" d="M340,128 L444,128"/>
+        <path class="j-out" d="M437,123 L445,128 L437,133"/>
+        <text class="j-label" x="453" y="133">Buyers</text>
+
+        <!-- stock written back to each connected shop -->
+        <path class="j-return" d="M306,150 C292,258 200,268 56,268 L56,240"/>
+        <path class="j-arrow"  d="M48,252 L56,238 L64,252"/>
+        <text class="j-cap" x="196" y="290" text-anchor="middle">Stock levels written back</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="band band-wash" id="marketplace">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="eyebrow">The marketplace</p>
+      <h2>One place for the things that keep people well</h2>
+      <p>
+        Crystals and minerals, natural skincare, herbal and wholefood ranges, yoga and meditation
+        supplies, books and gifts. Every listing belongs to an independent seller who packs and
+        posts it themselves, and who is paid directly for what they sell.
+      </p>
+    </div>
+    <div class="points">
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Independent sellers, named</h3>
+        <p>Each product carries the shop behind it. Buyers can follow a seller, read their reviews
+           and see everything else they make.</p>
+      </div>
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Practitioners and events</h3>
+        <p>Alongside the shop, a directory of practitioners and a listing for classes, workshops
+           and retreats — bookable in the same place.</p>
+      </div>
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Paid directly, in full</h3>
+        <p>Payments run through Stripe. Each seller is paid into their own account for their own
+           orders, with fees itemised rather than netted off quietly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="sellers">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="eyebrow">For sellers</p>
+      <h2>Connect the shop you already run</h2>
+      <p>
+        Most sellers who join us already trade somewhere else, and re-keying a catalogue by hand is
+        the reason people never get round to a new channel. So we read your existing shop instead.
+        You authorise Holistic Land from the platform you already use — no keys or passwords to
+        copy across — and we bring the catalogue over for you to review before anything goes live.
+      </p>
+    </div>
+
+    <div class="platforms">
+      <div class="platform">
+        <span class="tag">Shopify</span>
+        <h3>Products and delivery rates</h3>
+        <p>Authorise us from your Shopify admin. Your products come across, and your delivery
+           profiles are read too, so your postage prices here match the ones you already charge.</p>
+      </div>
+      <div class="platform">
+        <span class="tag">Etsy</span>
+        <h3>Listings, and stock both ways</h3>
+        <p>Your listings come across from your Etsy shop. When something sells on Holistic Land we
+           write the new stock level back to Etsy, so you are not left selling the last one twice.</p>
+      </div>
+      <div class="platform">
+        <span class="tag">eBay</span>
+        <h3>Listings and postage policies</h3>
+        <p>Your eBay listings and your business postage policies are read directly from your
+           account, and mapped onto the delivery options buyers choose from here.</p>
+      </div>
+      <div class="platform">
+        <span class="tag">Amazon</span>
+        <h3>Your own Amazon account</h3>
+        <p>Authorise Holistic Land from Seller Central and we work against your Amazon account, not
+           ours. Listings map to the right Amazon product type for their category.</p>
+      </div>
+    </div>
+
+    <div class="points" style="margin-top:clamp(34px,4.5vw,54px)">
+      <div class="point">
+        <div class="rule"></div>
+        <h3>You review before it publishes</h3>
+        <p>An import is a proposal, not a fait accompli. You see what we matched, change what we
+           got wrong, and choose what to leave behind.</p>
+      </div>
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Nothing is locked in</h3>
+        <p>Disconnect a shop whenever you like. Your Holistic Land listings stay yours, and we stop
+           reading the other platform that day.</p>
+      </div>
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Your own delivery terms</h3>
+        <p>Set your own postage rates and free-delivery threshold, or import the ones you already
+           use. Buyers see them per seller at checkout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-navy" id="register">
+  <div class="wrap">
+    <div class="register-grid">
+      <div class="band-head" style="margin-bottom:0">
+        <p class="eyebrow">Selling with us</p>
+        <h2>We’re onboarding founding partners</h2>
+        <p>
+          If you make, grow or curate something that belongs here — or you practise, teach or run
+          events — we would like to hear from you, whether or not you sell anywhere else yet.
+          Tell us how you would like to take part and we will be in touch as soon as we are ready
+          for you.
+        </p>
+      </div>
+
+      <form class="reg" id="reg-form" method="post"
+            action="https://staging.holistic.land/partner/interest/postpublic">
+        <fieldset class="reg-set">
+          <legend class="reg-legend">I would like to join as a…</legend>
+          <p class="reg-hint">Select all that apply.</p>
+          <div class="reg-types">
+            <label class="reg-type">
+              <input type="checkbox" name="partner_type[]" value="seller">
+              <span class="reg-type-in">
+                <strong>Seller</strong>
+                <span>Sell holistic and wellbeing products on the marketplace</span>
+              </span>
+            </label>
+            <label class="reg-type">
+              <input type="checkbox" name="partner_type[]" value="practitioner">
+              <span class="reg-type-in">
+                <strong>Practitioner</strong>
+                <span>Therapists, coaches and holistic health professionals</span>
+              </span>
+            </label>
+            <label class="reg-type">
+              <input type="checkbox" name="partner_type[]" value="event_creator">
+              <span class="reg-type-in">
+                <strong>Event creator</strong>
+                <span>Host workshops, retreats and wellbeing events</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="reg-set reg-details" id="reg-details" hidden>
+          <legend class="reg-legend">Your details</legend>
+          <div class="reg-row">
+            <label class="reg-field">
+              <span class="reg-label">First name</span>
+              <input type="text" name="firstname" autocomplete="given-name" required>
+            </label>
+            <label class="reg-field">
+              <span class="reg-label">Last name</span>
+              <input type="text" name="lastname" autocomplete="family-name" required>
+            </label>
+          </div>
+          <div class="reg-row">
+            <label class="reg-field">
+              <span class="reg-label">Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+            <label class="reg-field">
+              <span class="reg-label">Phone <span class="reg-opt">optional</span></span>
+              <input type="tel" name="phone" autocomplete="tel">
+            </label>
+          </div>
+          <label class="reg-pot" aria-hidden="true">
+            Leave this blank
+            <input type="text" name="email_confirm" tabindex="-1" autocomplete="off">
+          </label>
+          <button class="btn btn-ember" type="submit">Register my interest</button>
+          <p class="reg-small">We use your details only to contact you about joining Holistic Land.</p>
+        </fieldset>
+
+        <p class="reg-status" id="reg-status" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  var form    = document.getElementById('reg-form');
+  var details = document.getElementById('reg-details');
+  var status  = document.getElementById('reg-status');
+  if (!form) return;
+
+  var roles = form.querySelectorAll('input[name="partner_type[]"]');
+  function syncDetails() {
+    var picked = Array.prototype.some.call(roles, function (r) { return r.checked; });
+    details.hidden = !picked;
+  }
+  Array.prototype.forEach.call(roles, function (r) { r.addEventListener('change', syncDetails); });
+  syncDetails();
+
+  function say(message, state) {
+    status.textContent = message;
+    status.hidden = false;
+    if (state) { status.setAttribute('data-state', state); }
+    else { status.removeAttribute('data-state'); }
+  }
+
+  var landed = new URLSearchParams(window.location.search).get('registered');
+  if (landed === '1') {
+    form.innerHTML = '';
+    say('Thanks for your interest! We\u2019ll be in touch when the platform is ready.');
+  } else if (landed === '0') {
+    say('That did not send. Please check your details and try again.', 'error');
+  }
+
+  form.addEventListener('submit', function (e) {
+    if (!window.fetch) return;                 // no fetch: let the plain POST happen
+    e.preventDefault();
+
+    if (!Array.prototype.some.call(roles, function (r) { return r.checked; })) {
+      say('Choose at least one way you would like to take part.', 'error');
+      return;
+    }
+
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    say('Sending…');
+
+    fetch(form.action, { method: 'POST', body: new FormData(form) })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data && data.success) {
+          form.innerHTML = '';
+          say(data.message || 'Thank you — we have your details and will be in touch.');
+        } else {
+          button.disabled = false;
+          say((data && data.message) || 'That did not send. Please try again.', 'error');
+        }
+      })
+      .catch(function () {
+        button.disabled = false;
+        say('That did not send. Please check your connection and try again.', 'error');
+      });
+  });
+})();
+</script>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>Holistic Land</h3>
+        <p>A UK marketplace for holistic and wellbeing products, and for the practitioners and
+           event organisers who work alongside them.</p>
+      </div>
+      <div>
+        <h3>Partners</h3>
+        <p><a href="#register">Register your interest</a> and we will be in touch.</p>
+      </div>
+      <div>
+        <h3>Registered office</h3>
+        <address>
+          Suite A, 82 James Carter Road<br>
+          Mildenhall, Suffolk IP28 7DE<br>
+          United Kingdom
+        </address>
+      </div>
+    </div>
+    <div class="foot-base">© 2026 Holistic Land</div>
+  </div>
+</footer>
+
+</body>
+</html>
