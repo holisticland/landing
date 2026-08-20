@@ -735,6 +735,17 @@ p:last-child{margin-bottom:0}
   syncDetails();
   syncCompany();
 
+  /**
+   * Empty the form WITHOUT removing #reg-status. That paragraph lives inside the form, so
+   * wiping the whole form deleted the element the thank-you is written into, and a visitor
+   * who had just registered saw a blank box and no confirmation at all.
+   */
+  function clearFields() {
+    Array.prototype.forEach.call(form.querySelectorAll('fieldset'), function (f) {
+      f.parentNode.removeChild(f);
+    });
+  }
+
   function say(message, state) {
     status.textContent = message;
     status.hidden = false;
@@ -744,7 +755,7 @@ p:last-child{margin-bottom:0}
 
   var landed = new URLSearchParams(window.location.search).get('registered');
   if (landed === '1') {
-    form.innerHTML = '';
+    clearFields();
     say('Thanks for your interest! We\u2019ll be in touch when the platform is ready.');
   } else if (landed === '0') {
     say('That did not send. Please check your details and try again.', 'error');
@@ -784,7 +795,7 @@ p:last-child{margin-bottom:0}
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (data && data.success) {
-          form.innerHTML = '';
+          clearFields();
           say(data.message || 'Thank you — we have your details and will be in touch.');
         } else {
           button.disabled = false;
