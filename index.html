@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Holistic Land — a UK marketplace for holistic and wellbeing sellers</title>
-<meta name="description" content="Holistic Land is a UK marketplace for independent sellers of holistic and wellbeing products. Connect the shop you already run on Shopify, Etsy, eBay or Amazon: your listings come across and your stock stays in step.">
+<title>Holistic Land — one catalogue, every channel you sell on</title>
+<meta name="description" content="Holistic Land is a UK marketplace for independent sellers of holistic and wellbeing products. We build their listings and publish them into the seller's own accounts on Amazon, Etsy, eBay and Shopify, with stock kept in step.">
 <link rel="canonical" href="https://holistic.land/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://holistic.land/">
-<meta property="og:title" content="Holistic Land — a UK marketplace for holistic and wellbeing sellers">
-<meta property="og:description" content="Connect the shop you already run on Shopify, Etsy, eBay or Amazon. Your listings come across; your stock stays in step.">
+<meta property="og:title" content="Holistic Land — one catalogue, every channel you sell on">
+<meta property="og:description" content="We get independent UK wellbeing sellers onto the big marketplaces — listings built here and published into their own Amazon, Etsy, eBay and Shopify accounts.">
 <meta property="og:image" content="https://holistic.land/assets/logo.png">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='%23D9741A'/%3E%3C/svg%3E">
@@ -112,6 +112,10 @@ p:last-child{margin-bottom:0}
   .j-spark{animation:none;stroke-dasharray:none;opacity:.5}
 }
 
+.j-tile-amz{stroke:var(--ember);stroke-width:1.5}
+.j-label-amz{font-weight:700;fill:var(--ember)}
+.j-tip{fill:none;stroke:#AEC2D3;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+
 /* ---------- generic band ---------- */
 .band{padding-block:clamp(48px,7vw,86px);border-top:1px solid var(--rule)}
 .band-wash{background:var(--wash);border-top:none}
@@ -125,6 +129,20 @@ p:last-child{margin-bottom:0}
 .band-head:last-child{margin-bottom:0}
 .band-head p{color:var(--muted);margin-top:14px}
 .band-navy .band-head p{color:#B9C8D6}
+
+/* ---------- the listing spec ---------- */
+.spec{
+  margin:clamp(30px,4vw,46px) 0 0;border-top:1px solid var(--rule);
+  display:grid;grid-template-columns:minmax(150px,.42fr) minmax(0,1fr);
+}
+.spec dt{
+  font-family:Caudex,Georgia,serif;font-size:17px;font-weight:700;color:var(--ink);
+  padding:16px 24px 16px 0;border-bottom:1px solid var(--rule);
+}
+.spec dd{
+  margin:0;font-size:15.5px;color:var(--muted);
+  padding:16px 0;border-bottom:1px solid var(--rule);
+}
 
 /* ---------- platform cards ---------- */
 .platforms{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:1px;
@@ -167,6 +185,24 @@ p:last-child{margin-bottom:0}
 .reg-type input:checked + .reg-type-in{border-color:var(--ember-lit);background:rgba(245,142,82,.12)}
 .reg-type input:focus-visible + .reg-type-in{outline:2px solid var(--ember-lit);outline-offset:2px}
 
+/* HL-248: the questions registration asks, asked here too. Same shapes as the role
+   cards above so the form reads as one thing, not two bolted together. */
+.reg-block{margin-bottom:18px}
+.reg-block > .reg-label{margin-bottom:9px}
+.reg-note{font-size:12.5px;color:#8FA5B8;margin:8px 0 0}
+.reg-tags{display:flex;flex-wrap:wrap;gap:8px}
+.reg-tag{position:relative;display:inline-flex}
+.reg-tag input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.reg-tag span{display:inline-block;padding:7px 14px;border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;font-size:13.5px;color:#C6D5E2;background:rgba(255,255,255,.05);
+  transition:border-color .15s,background-color .15s,color .15s;user-select:none}
+.reg-tag:hover span{border-color:rgba(255,255,255,.45)}
+.reg-tag input:checked + span{border-color:var(--ember-lit);background:rgba(245,142,82,.16);
+  color:#fff;font-weight:600}
+.reg-tag input:focus-visible + span{outline:2px solid var(--ember-lit);outline-offset:2px}
+.reg-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.reg-waiting{font-size:13.5px;color:#7F94A8;margin:0}
+
 .reg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .reg-field{display:block;min-width:0}
 .reg-label{display:block;font-size:13px;font-weight:500;color:#C6D5E2;margin-bottom:6px}
@@ -174,8 +210,14 @@ p:last-child{margin-bottom:0}
 .reg-field input{width:100%;font:inherit;font-size:15px;color:#fff;
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);
   border-radius:8px;padding:10px 12px}
-.reg-field input:focus{outline:2px solid var(--ember-lit);outline-offset:1px;
-  border-color:transparent}
+.reg-field textarea,.reg-field select{width:100%;font:inherit;font-size:15px;color:#fff;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);
+  border-radius:8px;padding:10px 12px}
+.reg-field textarea{min-height:78px;resize:vertical;line-height:1.5}
+/* A native dropdown paints its list with the OS palette, not ours — keep the options legible. */
+.reg-field select option{color:#0F1B25;background:#fff}
+.reg-field input:focus,.reg-field textarea:focus,.reg-field select:focus{
+  outline:2px solid var(--ember-lit);outline-offset:1px;border-color:transparent}
 .reg-pot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .btn-ember{background:var(--ember-lit);color:#25160B;border:0;cursor:pointer;
   font-family:inherit;margin-top:6px}
@@ -201,6 +243,10 @@ p:last-child{margin-bottom:0}
   .hero-art{order:-1}
   .mast-nav{gap:18px}
   .reg-row{grid-template-columns:1fr}
+  .reg-choice{grid-template-columns:1fr}
+  .spec{grid-template-columns:1fr}
+  .spec dt{padding-bottom:2px;border-bottom:0}
+  .spec dd{padding-top:4px}
 }
 @media (max-width:460px){
   .mast-nav a[data-optional]{display:none}
@@ -214,8 +260,8 @@ p:last-child{margin-bottom:0}
   <div class="wrap">
     <img src="assets/logo.png" width="612" height="99" alt="Holistic Land">
     <nav class="mast-nav" aria-label="Sections">
-      <a href="#marketplace" data-optional>Marketplace</a>
-      <a href="#sellers">Sellers</a>
+      <a href="#publishing" data-optional>Publishing</a>
+      <a href="#account">Your account</a>
       <a href="#register">Register interest</a>
     </nav>
   </div>
@@ -227,165 +273,211 @@ p:last-child{margin-bottom:0}
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow">A UK marketplace for holistic wellbeing</p>
-      <h1>Sell here without <em>rebuilding</em> your shop.</h1>
+      <h1>We get our sellers <em>onto the big marketplaces</em>.</h1>
       <p class="lede">
-        Holistic Land brings independent UK sellers of holistic and wellbeing products together in
-        one storefront. If you already trade on Shopify, Etsy, eBay or Amazon, you connect that
-        shop rather than start again — your listings come across, and your stock stays in step so
-        the same item is never sold twice.
+        Holistic Land is a marketplace for independent UK makers of holistic and wellbeing goods —
+        crystals, natural skincare, herbal ranges, yoga supplies. Most of them sell in one place
+        only, because the product data is the wall. So we build the listings from the catalogue
+        they already keep with us and publish them into the seller's own accounts on Amazon, Etsy,
+        eBay and Shopify, with stock kept in step so nothing oversells.
       </p>
       <div class="actions">
-        <a class="btn btn-solid" href="#sellers">How connecting works</a>
+        <a class="btn btn-solid" href="#publishing">How publishing works</a>
         <a class="btn btn-line" href="#register">Register your interest</a>
       </div>
     </div>
 
     <div class="hero-art">
-      <!-- The junction: shops you already run, feeding one storefront, with stock returning. -->
+      <!-- One catalogue kept here, published out to the seller's own channel accounts. -->
       <svg class="junction" viewBox="0 0 520 300" role="img"
            aria-labelledby="jt jd" xmlns="http://www.w3.org/2000/svg">
-        <title id="jt">How a connected shop works</title>
-        <desc id="jd">Listings from Shopify, Etsy, eBay and Amazon flow into holistic.land and
-          reach buyers, while stock levels are written back to each connected shop.</desc>
+        <title id="jt">How publishing to your channels works</title>
+        <desc id="jd">A seller keeps one catalogue on holistic.land. From there we publish
+          listings out to their own Amazon, Etsy, eBay and Shopify accounts, and their orders and
+          stock levels come back so every channel holds the same number.</desc>
 
-        <text class="j-cap" x="0" y="12">Shops you already run</text>
+        <text class="j-cap" x="0" y="12">One catalogue, kept here</text>
+
+        <text class="j-hub-cap" x="96" y="98" text-anchor="middle">holistic.land</text>
+        <circle class="j-hub-ring" cx="96" cy="128" r="22"/>
+        <circle class="j-hub" cx="96" cy="128" r="12"/>
+
+        <text class="j-cap" x="300" y="12">Your own accounts</text>
 
         <g class="j-lane-1">
-          <rect class="j-tile" x="0" y="30" width="112" height="34" rx="8"/>
-          <text class="j-label" x="56" y="52" text-anchor="middle">Shopify</text>
-          <path class="j-lane"  d="M112,47 C200,47 218,128 296,128"/>
-          <path class="j-spark" d="M112,47 C200,47 218,128 296,128"/>
+          <path class="j-lane"  d="M118,128 C196,128 214,47 292,47"/>
+          <path class="j-spark" d="M118,128 C196,128 214,47 292,47"/>
+          <path class="j-tip"   d="M285,42 L293,47 L285,52"/>
+          <rect class="j-tile j-tile-amz" x="300" y="30" width="120" height="34" rx="8"/>
+          <text class="j-label j-label-amz" x="360" y="52" text-anchor="middle">Amazon</text>
         </g>
         <g class="j-lane-2">
-          <rect class="j-tile" x="0" y="84" width="112" height="34" rx="8"/>
-          <text class="j-label" x="56" y="106" text-anchor="middle">Etsy</text>
-          <path class="j-lane"  d="M112,101 C200,101 218,128 296,128"/>
-          <path class="j-spark" d="M112,101 C200,101 218,128 296,128"/>
+          <path class="j-lane"  d="M118,128 C196,128 214,101 292,101"/>
+          <path class="j-spark" d="M118,128 C196,128 214,101 292,101"/>
+          <path class="j-tip"   d="M285,96 L293,101 L285,106"/>
+          <rect class="j-tile" x="300" y="84" width="120" height="34" rx="8"/>
+          <text class="j-label" x="360" y="106" text-anchor="middle">Etsy</text>
         </g>
         <g class="j-lane-3">
-          <rect class="j-tile" x="0" y="138" width="112" height="34" rx="8"/>
-          <text class="j-label" x="56" y="160" text-anchor="middle">eBay</text>
-          <path class="j-lane"  d="M112,155 C200,155 218,128 296,128"/>
-          <path class="j-spark" d="M112,155 C200,155 218,128 296,128"/>
+          <path class="j-lane"  d="M118,128 C196,128 214,155 292,155"/>
+          <path class="j-spark" d="M118,128 C196,128 214,155 292,155"/>
+          <path class="j-tip"   d="M285,150 L293,155 L285,160"/>
+          <rect class="j-tile" x="300" y="138" width="120" height="34" rx="8"/>
+          <text class="j-label" x="360" y="160" text-anchor="middle">eBay</text>
         </g>
         <g class="j-lane-4">
-          <rect class="j-tile" x="0" y="192" width="112" height="34" rx="8"/>
-          <text class="j-label" x="56" y="214" text-anchor="middle">Amazon</text>
-          <path class="j-lane"  d="M112,209 C200,209 218,128 296,128"/>
-          <path class="j-spark" d="M112,209 C200,209 218,128 296,128"/>
+          <path class="j-lane"  d="M118,128 C196,128 214,209 292,209"/>
+          <path class="j-spark" d="M118,128 C196,128 214,209 292,209"/>
+          <path class="j-tip"   d="M285,204 L293,209 L285,214"/>
+          <rect class="j-tile" x="300" y="192" width="120" height="34" rx="8"/>
+          <text class="j-label" x="360" y="214" text-anchor="middle">Shopify</text>
         </g>
 
-        <!-- the hub is the dot from the holistic.land wordmark -->
-        <circle class="j-hub-ring" cx="318" cy="128" r="22"/>
-        <circle class="j-hub" cx="318" cy="128" r="12"/>
-        <text class="j-hub-cap" x="318" y="172" text-anchor="middle">holistic.land</text>
-
-        <!-- out to buyers -->
-        <path class="j-out" d="M340,128 L444,128"/>
-        <path class="j-out" d="M437,123 L445,128 L437,133"/>
-        <text class="j-label" x="453" y="133">Buyers</text>
-
-        <!-- stock written back to each connected shop -->
-        <path class="j-return" d="M306,150 C292,258 200,268 56,268 L56,240"/>
-        <path class="j-arrow"  d="M48,252 L56,238 L64,252"/>
-        <text class="j-cap" x="196" y="290" text-anchor="middle">Stock levels written back</text>
+        <!-- orders and stock levels return to the one catalogue -->
+        <path class="j-return" d="M360,234 C360,272 250,282 168,272 C124,264 100,214 96,162"/>
+        <path class="j-arrow"  d="M89,174 L96,160 L103,174"/>
+        <text class="j-cap" x="300" y="292" text-anchor="middle">Orders and stock come back</text>
       </svg>
     </div>
   </div>
 </section>
 
-<section class="band band-wash" id="marketplace">
+<section class="band band-wash" id="publishing">
   <div class="wrap">
     <div class="band-head">
-      <p class="eyebrow">The marketplace</p>
-      <h2>One place for the things that keep people well</h2>
+      <p class="eyebrow">Publishing your listings</p>
+      <h2>The listing is built here, and filed there</h2>
       <p>
-        Crystals and minerals, natural skincare, herbal and wholefood ranges, yoga and meditation
-        supplies, books and gifts. Every listing belongs to an independent seller who packs and
-        posts it themselves, and who is paid directly for what they sell.
+        A seller who has never listed on one of the big marketplaces stops at the same place: the
+        product type, the required attributes, the identifiers. We do that part. Their catalogue on
+        Holistic Land already holds the descriptions, images and prices, so we map it to whichever
+        channel's schema applies, show them what we produced, and publish only once they have said
+        yes.
       </p>
     </div>
-    <div class="points">
+
+    <dl class="spec">
+      <dt>Product type</dt>
+      <dd>Matched to each channel's own taxonomy — Amazon's product types, eBay's categories,
+        Etsy's — so a listing is validated against the schema that channel actually expects rather
+        than a generic one.</dd>
+
+      <dt>Required attributes</dt>
+      <dd>Filled from the catalogue. Anything a channel insists on that we cannot derive is asked
+        for once, in plain English, and remembered for the next listing.</dd>
+
+      <dt>Variations</dt>
+      <dd>Sizes, colours and weights publish as a single variation family, not as four unrelated
+        listings competing with each other.</dd>
+
+      <dt>Identifiers</dt>
+      <dd>GTIN or EAN where the seller holds one, or the exemption a channel has granted them.
+        Brand registration stays with the seller.</dd>
+
+      <dt>Images</dt>
+      <dd>Main and alternate images sent at each channel's minimum dimensions, so a listing is not
+        held back for a photo that is fifty pixels short.</dd>
+
+      <dt>Price and stock</dt>
+      <dd>Set by the seller, and kept current after publication rather than frozen at the moment
+        the listing went up.</dd>
+    </dl>
+
+    <div class="points" style="margin-top:clamp(34px,4.5vw,54px)">
       <div class="point">
         <div class="rule"></div>
-        <h3>Independent sellers, named</h3>
-        <p>Each product carries the shop behind it. Buyers can follow a seller, read their reviews
-           and see everything else they make.</p>
+        <h3>Nothing publishes unreviewed</h3>
+        <p>A generated listing is a draft. The seller sees every field we filled, corrects what we
+           got wrong, and chooses what to hold back.</p>
       </div>
       <div class="point">
         <div class="rule"></div>
-        <h3>Practitioners and events</h3>
-        <p>Alongside the shop, a directory of practitioners and a listing for classes, workshops
-           and retreats — bookable in the same place.</p>
+        <h3>Already selling elsewhere?</h3>
+        <p>Then we read the listings you already have rather than duplicate them, and write your
+           stock back as it moves — so no channel is selling a thing you have run out of.</p>
       </div>
       <div class="point">
         <div class="rule"></div>
-        <h3>Paid directly, in full</h3>
-        <p>Payments run through Stripe. Each seller is paid into their own account for their own
-           orders, with fees itemised rather than netted off quietly.</p>
+        <h3>One catalogue to maintain</h3>
+        <p>Change a price or a photo once. It goes out to every channel that seller has connected,
+           instead of being re-keyed four times or, more often, nowhere.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band" id="sellers">
+<section class="band" id="account">
   <div class="wrap">
     <div class="band-head">
-      <p class="eyebrow">For sellers</p>
-      <h2>Connect the shop you already run</h2>
+      <p class="eyebrow">Whose account it is</p>
+      <h2>It is the seller's account, not ours</h2>
       <p>
-        Most sellers who join us already trade somewhere else, and re-keying a catalogue by hand is
-        the reason people never get round to a new channel. So we read your existing shop instead.
-        You authorise Holistic Land from the platform you already use — no keys or passwords to
-        copy across — and we bring the catalogue over for you to review before anything goes live.
+        Sellers authorise Holistic Land from inside the channel itself — Seller Central for Amazon,
+        the shop admin for Etsy, eBay or Shopify — and we work on their behalf under their own
+        selling account. That channel's terms, its fees, its buyer relationship. We do not list
+        other people's goods under an account of ours, and we do not treat an order placed on
+        another channel as a lead to move somewhere else.
+      </p>
+    </div>
+    <div class="points">
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Authorised from the channel itself</h3>
+        <p>The seller grants access from inside the platform they already use. No keys to copy, no
+           password to hand over, and nothing that works without their consent.</p>
+      </div>
+      <div class="point">
+        <div class="rule"></div>
+        <h3>A channel's sale stays its own</h3>
+        <p>An order placed on Amazon, Etsy or eBay belongs there. We bring it into the seller's
+           panel so they can pick, pack and confirm dispatch alongside the rest — nothing more.</p>
+      </div>
+      <div class="point">
+        <div class="rule"></div>
+        <h3>Revocable that day</h3>
+        <p>Access can be withdrawn from the channel at any time. We stop reading and stop writing
+           immediately; the listings remain the seller's.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-wash" id="channels">
+  <div class="wrap">
+    <div class="band-head">
+      <p class="eyebrow">Every channel a seller runs</p>
+      <h2>Wherever they already trade</h2>
+      <p>
+        The same catalogue reaches wherever a seller already trades. Each channel keeps its own
+        rules — its own postage, its own listing shape — but they share one stock figure, which is
+        the part that stops the same last item being sold twice in an afternoon.
       </p>
     </div>
 
     <div class="platforms">
       <div class="platform">
-        <span class="tag">Shopify</span>
-        <h3>Products and delivery rates</h3>
-        <p>Authorise us from your Shopify admin. Your products come across, and your delivery
-           profiles are read too, so your postage prices here match the ones you already charge.</p>
+        <span class="tag">Amazon</span>
+        <h3>Published into Seller Central</h3>
+        <p>Listings are built against the right Amazon product type and filed under the seller's
+           own account. Quantities are written back as stock moves anywhere else.</p>
       </div>
       <div class="platform">
         <span class="tag">Etsy</span>
-        <h3>Listings, and stock both ways</h3>
-        <p>Your listings come across from your Etsy shop. When something sells on Holistic Land we
-           write the new stock level back to Etsy, so you are not left selling the last one twice.</p>
+        <h3>Listings out, stock both ways</h3>
+        <p>Products publish to the seller's Etsy shop, and a sale on either side updates the other,
+           so the shelf figure is the same in both places.</p>
       </div>
       <div class="platform">
         <span class="tag">eBay</span>
         <h3>Listings and postage policies</h3>
-        <p>Your eBay listings and your business postage policies are read directly from your
-           account, and mapped onto the delivery options buyers choose from here.</p>
+        <p>eBay listings are created against the seller's own business policies, so postage matches
+           what they already offer there.</p>
       </div>
       <div class="platform">
-        <span class="tag">Amazon</span>
-        <h3>Your own Amazon account</h3>
-        <p>Authorise Holistic Land from Seller Central and we work against your Amazon account, not
-           ours. Listings map to the right Amazon product type for their category.</p>
-      </div>
-    </div>
-
-    <div class="points" style="margin-top:clamp(34px,4.5vw,54px)">
-      <div class="point">
-        <div class="rule"></div>
-        <h3>You review before it publishes</h3>
-        <p>An import is a proposal, not a fait accompli. You see what we matched, change what we
-           got wrong, and choose what to leave behind.</p>
-      </div>
-      <div class="point">
-        <div class="rule"></div>
-        <h3>Nothing is locked in</h3>
-        <p>Disconnect a shop whenever you like. Your Holistic Land listings stay yours, and we stop
-           reading the other platform that day.</p>
-      </div>
-      <div class="point">
-        <div class="rule"></div>
-        <h3>Your own delivery terms</h3>
-        <p>Set your own postage rates and free-delivery threshold, or import the ones you already
-           use. Buyers see them per seller at checkout.</p>
+        <span class="tag">Shopify</span>
+        <h3>Products and delivery rates</h3>
+        <p>Products move between the seller's Shopify store and Holistic Land, delivery profiles
+           included, so postage prices agree across both.</p>
       </div>
     </div>
   </div>
@@ -457,6 +549,58 @@ p:last-child{margin-bottom:0}
               <input type="tel" name="phone" autocomplete="tel">
             </label>
           </div>
+          <div class="reg-block" data-type-block="practitioner" hidden>
+            <span class="reg-label">Which therapies or modalities do you offer?</span>
+            <div class="reg-tags" id="reg-therapies">
+              <p class="reg-waiting">Loading the list…</p>
+            </div>
+          </div>
+
+          <div class="reg-block" data-type-block="seller" hidden>
+            <label class="reg-field">
+              <span class="reg-label">Briefly describe what you sell <span class="reg-opt">optional</span></span>
+              <textarea name="shop_description" rows="3" maxlength="1000"
+                        placeholder="e.g. handmade crystal jewellery and energy tools"></textarea>
+            </label>
+          </div>
+
+          <div class="reg-block">
+            <span class="reg-label">Are you registering as…</span>
+            <div class="reg-choice">
+              <label class="reg-type">
+                <input type="radio" name="business_type" value="individual" checked>
+                <span class="reg-type-in">
+                  <strong>Individual</strong>
+                  <span>Sole trader, freelancer or self-employed practitioner</span>
+                </span>
+              </label>
+              <label class="reg-type">
+                <input type="radio" name="business_type" value="company">
+                <span class="reg-type-in">
+                  <strong>Company</strong>
+                  <span>Limited company or registered business</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="reg-block" id="reg-company" hidden>
+            <label class="reg-field">
+              <span class="reg-label">Registered business name</span>
+              <input type="text" name="company_name" autocomplete="organization">
+            </label>
+          </div>
+
+          <div class="reg-block" id="reg-industry-block" hidden>
+            <label class="reg-field">
+              <span class="reg-label">Industry</span>
+              <select name="industry_mcc" id="reg-industry">
+                <option value="">Please select…</option>
+              </select>
+            </label>
+            <p class="reg-note">The option that best describes what your customers will buy from you.</p>
+          </div>
+
           <label class="reg-pot" aria-hidden="true">
             Leave this blank
             <input type="text" name="email_confirm" tabindex="-1" autocomplete="off">
@@ -480,13 +624,116 @@ p:last-child{margin-bottom:0}
   var status  = document.getElementById('reg-status');
   if (!form) return;
 
-  var roles = form.querySelectorAll('input[name="partner_type[]"]');
+  var roles    = form.querySelectorAll('input[name="partner_type[]"]');
+  var blocks   = form.querySelectorAll('[data-type-block]');
+  var company  = document.getElementById('reg-company');
+  var therapyBox   = document.getElementById('reg-therapies');
+  var industryBlock = document.getElementById('reg-industry-block');
+  var industrySelect = document.getElementById('reg-industry');
+
+  /**
+   * HL-248: the therapy and industry lists live in Magento, not in this file.
+   *
+   * Therapies are submitted as option IDs and the endpoint drops IDs it does not recognise, so a
+   * hardcoded list here would keep "working" after someone edits the list in admin while quietly
+   * saving leads with no modalities. Read the live lists instead — same host as the form action,
+   * so the two can never point at different environments.
+   */
+  var optionsUrl = form.action.replace(/\/postpublic\/?$/, '/options');
+  var optionsState = 'idle';   // idle | loading | ready | failed
+
+  function isPicked(role) {
+    return !!form.querySelector('input[name="partner_type[]"][value="' + role + '"]:checked');
+  }
+
+  function loadOptions() {
+    if (optionsState !== 'idle' || !window.fetch) {
+      if (!window.fetch) { failOptions(); }
+      return;
+    }
+    optionsState = 'loading';
+
+    // Bare GET, no custom headers — that keeps it a CORS simple request with no preflight.
+    fetch(optionsUrl)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        renderTherapies((data && data.therapies) || []);
+        renderIndustries((data && data.industries) || []);
+        optionsState = 'ready';
+      })
+      .catch(failOptions);
+  }
+
+  /**
+   * If the lists cannot be fetched, drop the questions rather than the lead. The endpoint does not
+   * require these answers, so a lead still lands with a name, an email and a role — which is what
+   * this form collected before HL-248 anyway.
+   */
+  function failOptions() {
+    optionsState = 'failed';
+    therapyBox.innerHTML = '';
+    Array.prototype.forEach.call(blocks, function (b) {
+      if (b.getAttribute('data-type-block') === 'practitioner') { b.hidden = true; }
+    });
+    industryBlock.hidden = true;
+  }
+
+  function renderTherapies(list) {
+    therapyBox.innerHTML = '';
+    if (!list.length) { return; }
+    list.forEach(function (option) {
+      var label = document.createElement('label');
+      label.className = 'reg-tag';
+
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.name = 'therapies[]';
+      input.value = option.id;
+
+      var text = document.createElement('span');
+      text.textContent = option.label;
+
+      label.appendChild(input);
+      label.appendChild(text);
+      therapyBox.appendChild(label);
+    });
+  }
+
+  function renderIndustries(list) {
+    if (!list.length) { industryBlock.hidden = true; return; }
+    list.forEach(function (option) {
+      var opt = document.createElement('option');
+      opt.value = option.value;
+      opt.textContent = option.label;
+      industrySelect.appendChild(opt);
+    });
+    industryBlock.hidden = false;
+  }
+
   function syncDetails() {
     var picked = Array.prototype.some.call(roles, function (r) { return r.checked; });
     details.hidden = !picked;
+    if (picked) { loadOptions(); }
+
+    Array.prototype.forEach.call(blocks, function (b) {
+      var role = b.getAttribute('data-type-block');
+      b.hidden = !isPicked(role) || (role === 'practitioner' && optionsState === 'failed');
+    });
   }
+
+  function syncCompany() {
+    var isCompany = !!form.querySelector('input[name="business_type"][value="company"]:checked');
+    company.hidden = !isCompany;
+    if (!isCompany) { company.querySelector('input').value = ''; }
+  }
+
   Array.prototype.forEach.call(roles, function (r) { r.addEventListener('change', syncDetails); });
+  Array.prototype.forEach.call(
+    form.querySelectorAll('input[name="business_type"]'),
+    function (r) { r.addEventListener('change', syncCompany); }
+  );
   syncDetails();
+  syncCompany();
 
   function say(message, state) {
     status.textContent = message;
@@ -509,6 +756,23 @@ p:last-child{margin-bottom:0}
 
     if (!Array.prototype.some.call(roles, function (r) { return r.checked; })) {
       say('Choose at least one way you would like to take part.', 'error');
+      return;
+    }
+
+    // A checkbox group cannot carry `required` meaning "at least one".
+    if (isPicked('practitioner') && therapyBox.querySelector('input')
+        && !therapyBox.querySelector('input:checked')) {
+      say('Choose at least one therapy or modality.', 'error');
+      return;
+    }
+
+    if (!company.hidden && !company.querySelector('input').value.trim()) {
+      say('Enter your registered business name.', 'error');
+      return;
+    }
+
+    if (!industryBlock.hidden && !industrySelect.value) {
+      say('Choose the industry that best describes what you do.', 'error');
       return;
     }
 
@@ -540,8 +804,8 @@ p:last-child{margin-bottom:0}
     <div class="foot-grid">
       <div>
         <h3>Holistic Land</h3>
-        <p>A UK marketplace for holistic and wellbeing products, and for the practitioners and
-           event organisers who work alongside them.</p>
+        <p>A UK marketplace for holistic and wellbeing products, and the place its sellers keep the
+           one catalogue they publish everywhere else from.</p>
       </div>
       <div>
         <h3>Partners</h3>
