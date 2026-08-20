@@ -204,6 +204,9 @@ p:last-child{margin-bottom:0}
 .reg-waiting{font-size:13.5px;color:#7F94A8;margin:0}
 
 .reg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.reg-phone{display:flex;gap:8px}
+.reg-phone select{flex:0 0 7.5rem;min-width:0}
+.reg-phone input{flex:1 1 auto;min-width:0}
 .reg-field{display:block;min-width:0}
 .reg-label{display:block;font-size:13px;font-weight:500;color:#C6D5E2;margin-bottom:6px}
 .reg-opt{color:#7F94A8;font-weight:400}
@@ -546,7 +549,12 @@ p:last-child{margin-bottom:0}
             </label>
             <label class="reg-field">
               <span class="reg-label">Phone <span class="reg-opt">optional</span></span>
-              <input type="tel" name="phone" autocomplete="tel">
+              <span class="reg-phone">
+                <select id="reg-phone-cc" name="phone_country" aria-label="Country dialling code" hidden></select>
+                <input type="tel" id="reg-phone-national" inputmode="tel" autocomplete="tel-national">
+              </span>
+              <!-- The only phone field actually submitted: the composed E.164 value. -->
+              <input type="hidden" id="reg-phone" name="phone" value="">
             </label>
           </div>
           <div class="reg-block" data-type-block="practitioner" hidden>
@@ -630,6 +638,9 @@ p:last-child{margin-bottom:0}
   var therapyBox   = document.getElementById('reg-therapies');
   var industryBlock = document.getElementById('reg-industry-block');
   var industrySelect = document.getElementById('reg-industry');
+  var phoneCc       = document.getElementById('reg-phone-cc');
+  var phoneNational = document.getElementById('reg-phone-national');
+  var phoneValue    = document.getElementById('reg-phone');
 
   /**
    * HL-248: the therapy and industry lists live in Magento, not in this file.
@@ -659,6 +670,7 @@ p:last-child{margin-bottom:0}
       .then(function (data) {
         renderTherapies((data && data.therapies) || []);
         renderIndustries((data && data.industries) || []);
+        renderDialCodes((data && data.dialCodes) || []);
         optionsState = 'ready';
       })
       .catch(failOptions);
@@ -676,6 +688,7 @@ p:last-child{margin-bottom:0}
       if (b.getAttribute('data-type-block') === 'practitioner') { b.hidden = true; }
     });
     industryBlock.hidden = true;
+    hideDialCodes();
   }
 
   function renderTherapies(list) {
@@ -697,6 +710,49 @@ p:last-child{margin-bottom:0}
       label.appendChild(text);
       therapyBox.appendChild(label);
     });
+  }
+
+  /**
+   * HL-105: the dialling-code dropdown, so this form posts E.164 like registration does rather
+   * than whatever the visitor typed. The list comes from the same /options call as the rest —
+   * one fetch, and it can never disagree with the countries the platform actually supports.
+   */
+  function renderDialCodes(list) {
+    if (!phoneCc) { return; }
+    if (!list.length) { hideDialCodes(); return; }
+    phoneCc.hidden = false;
+    list.forEach(function (dc) {
+      var opt = document.createElement('option');
+      opt.value = dc.iso;
+      opt.setAttribute('data-code', dc.code);
+      opt.textContent = dc.code + '  ' + dc.name;
+      phoneCc.appendChild(opt);
+    });
+  }
+
+  /**
+   * With no list to pick from, the dropdown is hidden and the number is posted exactly as typed —
+   * the behaviour this form had before HL-105. Better an untidy number than a mangled one: a
+   * composed value with no dialling code would post bare digits and read as a foreign number.
+   */
+  function hideDialCodes() {
+    if (phoneCc) { phoneCc.hidden = true; }
+  }
+
+  // Same composition rule as registration and the on-site form: digits only, trunk zeros
+  // stripped. An empty national number clears the field rather than posting a bare "+44".
+  function syncPhone() {
+    if (!phoneNational || !phoneValue) { return; }
+    var opt  = phoneCc && !phoneCc.hidden ? phoneCc.options[phoneCc.selectedIndex] : null;
+    var code = (opt && opt.getAttribute('data-code')) || '';
+
+    if (!code) {                       // no usable list — pass the raw value straight through
+      phoneValue.value = phoneNational.value || '';
+      return;
+    }
+
+    var natl = (phoneNational.value || '').replace(/[^0-9]/g, '').replace(/^0+/, '');
+    phoneValue.value = natl ? (code + natl) : '';
   }
 
   function renderIndustries(list) {
@@ -786,6 +842,8 @@ p:last-child{margin-bottom:0}
       say('Choose the industry that best describes what you do.', 'error');
       return;
     }
+
+    syncPhone();
 
     var button = form.querySelector('button[type="submit"]');
     button.disabled = true;
