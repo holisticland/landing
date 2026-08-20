@@ -755,6 +755,19 @@ p:last-child{margin-bottom:0}
     phoneValue.value = natl ? (code + natl) : '';
   }
 
+  /**
+   * Keep the hidden field current as the visitor types, rather than only composing it on submit.
+   * The submit handler bails out early on a browser with no `fetch` and lets the plain POST
+   * happen — and that path never reaches the compose step, so a submit-only sync would post an
+   * empty phone and lose the number altogether.
+   */
+  if (phoneNational && phoneCc) {
+    ['input', 'change'].forEach(function (evt) {
+      phoneNational.addEventListener(evt, syncPhone);
+      phoneCc.addEventListener(evt, syncPhone);
+    });
+  }
+
   function renderIndustries(list) {
     if (!list.length) { industryBlock.hidden = true; return; }
     list.forEach(function (option) {
